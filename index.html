@@ -42,12 +42,13 @@ body {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background: var(--bg);
   z-index: 100;
   transition: opacity 0.9s ease, transform 0.9s ease;
-  padding: 20px;
+  padding: 32px 20px 32px;
+  overflow-y: auto;
 }
 /* vignette */
 #landing::after {
@@ -66,33 +67,16 @@ body {
 
 /* ── folder wrapper */
 .file-outer {
-  max-width: 600px;
+  max-width: 680px;
   width: 100%;
   position: relative;
-  padding-top: 26px;
   z-index: 102;
-  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.75)) drop-shadow(0 0 60px rgba(168,85,247,0.1));
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.75)) drop-shadow(0 0 60px rgba(168,85,247,0.08));
 }
 
 /* ── the tab sticking up */
 .file-tab {
-  position: absolute;
-  top: 0;
-  left: 44px;
-  width: 130px;
-  height: 28px;
-  background: #0e0b1c;
-  border: 1.5px solid #3d1f6e;
-  border-bottom: none;
-  border-radius: 4px 4px 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  letter-spacing: 0.24em;
-  color: #5a3f8a;
-  text-transform: uppercase;
+  display: none;
 }
 
 /* ── index tabs on the right side */
@@ -130,32 +114,13 @@ body {
 
 /* ── the file itself */
 .file-cover {
-  border: 1.5px solid #4a2a80;
-  background: #141028;
+  border: 1px solid #2e1a50;
+  background: #0f0b1e;
   position: relative;
   overflow: hidden;
-  box-shadow: 6px 6px 0 rgba(0,0,0,0.6), 12px 12px 0 rgba(0,0,0,0.25);
 }
 
-/* ── dog-ear: cut top-right corner */
-.file-cover::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  border-style: solid;
-  border-width: 0 32px 32px 0;
-  border-color: transparent var(--bg) transparent transparent;
-  z-index: 8;
-}
-/* ── dog-ear fold shadow */
-.file-cover::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 32px;
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, #1e1035 50%, transparent 50%);
-  z-index: 7;
-}
+/* dog-ear removed */
 
 /* ── paper grain */
 .file-grain {
@@ -208,22 +173,22 @@ body {
   z-index: 0;
 }
 
-/* ── red classification banners — solid, authoritative */
+/* ── classification banners */
 .class-banner {
   font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.28em;
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  padding: 10px 16px;
+  padding: 8px 16px;
   text-align: center;
   position: relative;
   z-index: 1;
-  color: #ff6b6b;
-  background: #2a0606;
+  color: #7a5060;
+  background: #0e080c;
 }
-.class-banner.top { border-bottom: 2px solid #5a1010; }
-.class-banner.bottom { border-top: 2px solid #5a1010; }
+.class-banner.top { border-bottom: 1px solid #2a1520; }
+.class-banner.bottom { border-top: 1px solid #2a1520; }
 
 /* ── classification spine tape (left edge) */
 .file-spine {
@@ -257,9 +222,337 @@ body {
 
 /* ── file body content */
 .file-body {
-  padding: 22px 28px 28px 46px;
+  padding: 0;
   position: relative;
   z-index: 1;
+}
+.file-body.has-hero {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ══════════════════════════════════════
+   CRIMINAL PROFILE — POLICE FILE LAYOUT
+   ══════════════════════════════════════ */
+
+/* department header */
+.profile-dept {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px 13px;
+  border-bottom: 1px solid #2a1650;
+  background: #0c0918;
+}
+.profile-dept-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #7a5a9a;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+.profile-dept-name strong {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #b090d8;
+  font-weight: 500;
+}
+.profile-dept-case {
+  text-align: right;
+}
+.profile-dept-case-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: #6a4e88;
+  text-transform: uppercase;
+  display: block;
+}
+.profile-dept-case-num {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  color: #c084fc;
+  font-weight: 500;
+}
+
+/* main body: fields left, photo right */
+.profile-body {
+  display: flex;
+  gap: 0;
+  padding: 24px 24px 0;
+}
+
+/* fields column */
+.profile-fields {
+  flex: 1;
+  min-width: 0;
+  padding-right: 20px;
+  overflow: hidden;
+}
+.profile-name {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  font-style: italic;
+  color: #ede0ff;
+  line-height: 1;
+  margin-bottom: 22px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* TOP SECRET circular ink stamp */
+.top-secret-stamp {
+  position: absolute;
+  top: 348px;
+  right: 40px;
+  width: 116px;
+  height: 116px;
+  transform: rotate(-14deg);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.9;
+}
+.top-secret-stamp svg {
+  width: 100%;
+  height: 100%;
+}
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  padding: 9px 0;
+  border-bottom: 1px solid #1a0e2e;
+}
+.profile-field:last-child { border-bottom: none; }
+.profile-field-key {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: #7a5a9a;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.profile-field-val {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #c0a0e0;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.profile-field-val.redact {
+  display: inline-block;
+  background: #2a1840;
+  color: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  padding: 1px 4px;
+  user-select: none;
+  letter-spacing: 0.05em;
+}
+.profile-field-val.redact:hover {
+  background: rgba(168,85,247,0.15);
+  color: #c084fc;
+}
+
+/* photo column — top right, framed */
+.profile-photo-col {
+  width: 160px;
+  flex-shrink: 0;
+  min-width: 160px;
+}
+.profile-photo-frame {
+  border: 1.5px solid #3d2060;
+  padding: 6px;
+  background: #0c0918;
+  position: relative;
+}
+/* corner notches */
+.profile-photo-frame::before,
+.profile-photo-frame::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #7a5a9a;
+  border-style: solid;
+}
+.profile-photo-frame::before {
+  top: -1px; left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.profile-photo-frame::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 2px 2px 0;
+}
+.profile-photo-frame img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.7) contrast(1.1) brightness(0.92);
+}
+.profile-photo-exhibit {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: #6a4e88;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* case narrative */
+.profile-narrative {
+  margin: 0 24px;
+  padding: 18px 0 16px;
+  border-top: 1px solid #1a0e2e;
+}
+.profile-narrative-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: #7a5a9a;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 12px;
+}
+.profile-narrative-text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #c0a0e0;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+.profile-reader-liability {
+  margin: 0 24px 20px;
+  padding: 14px 18px;
+  border: 1px solid #3a1f60;
+  background: rgba(30, 10, 50, 0.4);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #8060a8;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+}
+.rl-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7a5a9a;
+  letter-spacing: 0.22em;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.rl-warn {
+  font-size: 18px;
+  color: #a070d0;
+  opacity: 1;
+  flex-shrink: 0;
+  line-height: 1;
+}
+/* inline redact */
+.redact {
+  display: inline;
+  background: #221436;
+  color: transparent;
+  border-radius: 1px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  padding: 0 3px;
+  user-select: none;
+}
+.redact:hover {
+  background: rgba(168,85,247,0.14);
+  color: #c084fc;
+}
+
+/* fingerprint section */
+.profile-prints {
+  margin: 0 24px;
+  padding: 16px 0 18px;
+  border-top: 1px solid #1e1030;
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+.profile-prints-label {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.38em;
+  color: #7a5a9a;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 14px;
+}
+.profile-prints-cards {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+.profile-prints-info {
+  flex: 1;
+  padding-right: 20px;
+}
+.profile-prints-note {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #6a4e88;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+  margin-top: 10px;
+}
+.fingerprint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.fingerprint svg {
+  opacity: 0.55;
+}
+.fingerprint-label {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  letter-spacing: 0.22em;
+  color: #5a3f78;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* footer */
+.profile-footer {
+  border-top: 1px solid #1e1030;
+  display: flex;
+  align-items: stretch;
+  margin-top: 4px;
+}
+.profile-classification {
+  flex: 1;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.profile-classification-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: #6a4e88;
+  text-transform: uppercase;
+}
+.profile-classification-sep {
+  width: 1px;
+  height: 14px;
+  background: #2a1840;
+  flex-shrink: 0;
 }
 
 /* ── hero title block */
@@ -305,7 +598,7 @@ body {
   line-height: 1.05;
   letter-spacing: -0.01em;
   margin-bottom: 12px;
-  text-shadow: 0 0 40px rgba(168,85,247,0.2);
+  text-shadow: none;
   animation: title-flicker 7s infinite;
 }
 .file-hero-desc {
@@ -331,16 +624,15 @@ body {
 .stamp-classified {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.26em;
-  color: #cc2a2a;
-  border: 2.5px solid #cc2a2a;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: rgba(160,100,120,0.7);
+  border: 2px solid rgba(160,100,120,0.45);
   padding: 5px 12px;
   transform: rotate(-2.5deg);
   margin-bottom: 16px;
   text-transform: uppercase;
-  box-shadow: 0 0 14px rgba(180,30,30,0.2);
   animation: stamp-in 0.45s cubic-bezier(0.22,1,0.36,1) 0.6s both;
 }
 
@@ -368,7 +660,7 @@ body {
   text-transform: uppercase;
   opacity: 0.75;
 }
-.meta-val { color: #d8b8ff; font-weight: 600; font-size: 12px; }
+.meta-val { color: #a890cc; font-weight: 500; font-size: 12px; }
 .meta-val.redacted { color: #3d2860; letter-spacing: 0.05em; font-weight: 400; }
 
 /* ── photo box */
@@ -394,17 +686,16 @@ body {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%) rotate(-22deg);
   font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(210,40,40,0.75);
-  border: 3px solid rgba(210,40,40,0.65);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: rgba(160,100,120,0.6);
+  border: 2px solid rgba(160,100,120,0.45);
   padding: 3px 8px;
   white-space: nowrap;
   z-index: 2;
   pointer-events: none;
   text-transform: uppercase;
-  box-shadow: 0 0 10px rgba(200,30,30,0.2) inset;
 }
 
 /* ── eyes-only seal */
@@ -444,13 +735,12 @@ body {
 /* THREAT LEVEL indicator dot */
 .threat-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: #c03030;
+  background: rgba(160,100,120,0.7);
   margin-right: 6px;
   vertical-align: middle;
-  box-shadow: 0 0 4px rgba(192,48,48,0.6);
   flex-shrink: 0;
 }
 
@@ -520,44 +810,42 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 100%;
-  background: rgba(80,10,10,0.35);
-  border: 2px solid #8a2020;
-  padding: 18px 26px;
+  gap: 4px;
+  background: rgba(168,85,247,0.1);
+  border: 1.5px solid rgba(168,85,247,0.5);
+  border-radius: 3px;
+  margin: 12px 20px 12px 16px;
+  padding: 12px 28px;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.1s, box-shadow 0.2s;
-  margin-top: 6px;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   position: relative;
-  box-shadow: 0 0 20px rgba(180,30,30,0.15), inset 0 0 30px rgba(80,10,10,0.2);
-  animation: btn-pulse 3.5s ease-in-out infinite;
+  flex-shrink: 0;
+  box-shadow: 0 0 18px rgba(168,85,247,0.12);
 }
 .btn-open-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #903030;
+  color: #9060c8;
   font-weight: 400;
 }
 .btn-open-cta {
   font-family: var(--font-mono);
-  font-size: 15px;
-  letter-spacing: 0.32em;
+  font-size: 13px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #ff7070;
-  font-weight: 700;
+  color: #c084fc;
+  font-weight: 600;
 }
 .btn-open:hover {
-  background: rgba(120,15,15,0.5);
-  border-color: #cc2a2a;
-  transform: translateY(-1px);
-  box-shadow: 0 0 36px rgba(200,40,40,0.3), inset 0 0 30px rgba(100,10,10,0.25);
-  animation: none;
+  background: rgba(168,85,247,0.2);
+  border-color: rgba(168,85,247,0.8);
+  box-shadow: 0 0 28px rgba(168,85,247,0.25);
 }
-.btn-open:hover .btn-open-cta { color: #ff9090; }
-.btn-open:hover .btn-open-label { color: #b04040; }
-.btn-open:active { transform: translateY(0); }
+.btn-open:hover .btn-open-cta { color: var(--highlight); }
+.btn-open:hover .btn-open-label { color: #a070d8; }
+.btn-open:active { opacity: 0.8; }
 
 /* ── keyframes ── */
 @keyframes stamp-in {
@@ -680,31 +968,58 @@ body {
 
 /* file header brand strip */
 .file-header {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 28px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  padding: 0 32px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
+  min-height: 48px;
 }
 
 .file-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-right: 1px solid var(--border);
+  padding-right: 20px;
+}
+.file-header-label {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  color: var(--border);
+  font-size: 8.5px;
+  letter-spacing: 0.3em;
+  color: #3d2060;
   text-transform: uppercase;
 }
 .file-header-left strong {
-  color: var(--muted);
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .file-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.file-header-title {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-style: italic;
+  color: #4a3070;
+  letter-spacing: 0.02em;
+}
+.file-header-ref {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--border);
-  letter-spacing: 0.1em;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  color: #2e1a50;
+  text-transform: uppercase;
+  border-left: 1px solid var(--border);
+  padding-left: 20px;
 }
 
 /* ─── ROOMS ────────────────────────────────────── */
@@ -722,9 +1037,62 @@ body {
   overflow: hidden;
   position: relative;
 }
+/* rooms with a hero: zero out all padding so hero sits flush */
+#room-kitchen,
+#room-bathtub,
+#room-bedroom,
+#room-balcony,
+#room-toilet,
+#room-library {
+  padding: 0;
+  max-width: 100%;
+}
+#room-kitchen .room-hero,
+#room-bathtub .room-hero,
+#room-bedroom .room-hero,
+#room-balcony .room-hero,
+#room-toilet .room-hero,
+#room-library .room-hero {
+  margin: 0;
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  transform: none;
+}
+/* restore content padding below the hero */
+#room-kitchen > *:not(.room-hero),
+#room-bathtub > *:not(.room-hero),
+#room-bedroom > *:not(.room-hero),
+#room-balcony > *:not(.room-hero),
+#room-toilet > *:not(.room-hero),
+#room-library > *:not(.room-hero) {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+#room-kitchen .room-heading,
+#room-bathtub .room-heading,
+#room-bedroom .room-heading,
+#room-balcony .room-heading,
+#room-toilet .room-heading,
+#room-library .room-heading {
+  padding-top: 32px;
+}
+/* bathtub: tag bar owns the divider, so sub has no extra gap */
+#room-bathtub .room-sub {
+  margin-bottom: 0;
+  padding-bottom: 20px;
+  border-bottom: none;
+}
+#room-bathtub .tag-filter-bar {
+  padding-top: 20px;
+}
 .room-hero-img {
   width: 100%;
-  height: 340px;
+  height: 380px;
   object-fit: cover;
   object-position: center center;
   display: block;
@@ -734,7 +1102,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 45%, var(--bg) 100%);
+  background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%);
   pointer-events: none;
 }
 
@@ -867,16 +1235,30 @@ body {
   flex: 1;
   display: flex;
   align-items: flex-start;
-  padding: 28px 24px;
+  justify-content: flex-start;
+  padding: 36px 32px 28px;
   position: relative;
   z-index: 1;
+  min-height: calc(100vh - 36px); /* fill to bottom of viewport */
 }
 
-/* ── icon grid (2 columns on left like a real desktop) */
+/* dark-to-transparent gradient over the left half */
+.desktop-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(13,5,20,0.62) 0%, rgba(13,5,20,0.45) 35%, rgba(13,5,20,0.15) 60%, transparent 80%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── icon grid — 2 columns, left side */
 .desktop-icons-grid {
   display: grid;
-  grid-template-columns: repeat(2, 80px);
-  gap: 6px 4px;
+  grid-template-columns: repeat(2, 100px);
+  gap: 16px 10px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── single icon */
@@ -884,15 +1266,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
-  padding: 9px 6px;
-  width: 80px;
-  border-radius: 3px;
+  gap: 10px;
+  padding: 12px 8px;
+  width: 100px;
+  border-radius: 6px;
   border: 1px solid transparent;
   cursor: pointer;
   outline: none;
   user-select: none;
-  transition: background 0.1s, border-color 0.1s, transform 0.1s;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
   animation: icon-appear 0.35s ease both;
 }
 .desktop-icon:nth-child(1) { animation-delay: 0.04s; }
@@ -906,135 +1288,180 @@ body {
 
 .desktop-icon:hover,
 .desktop-icon:focus {
-  background: rgba(168,85,247,0.13);
-  border-color: rgba(168,85,247,0.35);
+  background: rgba(168,85,247,0.18);
+  border-color: rgba(168,85,247,0.45);
 }
 .desktop-icon:active {
-  background: rgba(168,85,247,0.22);
-  transform: scale(0.95);
+  transform: scale(0.94);
 }
 
 /* ── folder shape (pure CSS) */
 .icon-folder {
-  width: 50px;
-  height: 40px;
+  width: 64px;
+  height: 52px;
   position: relative;
   flex-shrink: 0;
 }
-/* folder body */
+/* folder body — solid, opaque */
 .icon-folder::before {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 33px;
-  background: linear-gradient(155deg, var(--fc, #6b3fa8) 0%, #12082a 100%);
-  border-radius: 2px 4px 4px 4px;
+  height: 43px;
+  background: var(--fc, #7c4de0);
+  border-radius: 2px 5px 5px 5px;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.11),
-    inset -1px -1px 0 rgba(0,0,0,0.2),
-    0 4px 12px rgba(0,0,0,0.5);
+    inset 0 2px 0 rgba(255,255,255,0.25),
+    inset 0 -2px 0 rgba(0,0,0,0.25),
+    0 6px 20px rgba(0,0,0,0.6);
 }
 /* folder tab */
 .icon-folder::after {
   content: '';
   position: absolute;
   top: 0; left: 0;
-  width: 22px; height: 8px;
-  background: var(--fc, #6b3fa8);
-  border-radius: 3px 3px 0 0;
-  filter: brightness(1.2);
+  width: 28px; height: 11px;
+  background: var(--fc, #7c4de0);
+  border-radius: 4px 4px 0 0;
+  filter: brightness(1.35);
 }
 /* lock badge for dungeon */
 .folder-badge {
   position: absolute;
-  bottom: 3px; right: 5px;
-  font-size: 11px;
+  bottom: 5px; right: 7px;
+  font-size: 13px;
   line-height: 1;
   z-index: 2;
-  filter: grayscale(0.3);
 }
 
 /* ── icon label */
 .icon-label {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  color: #c8a8e8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
   text-align: center;
   line-height: 1.3;
-  max-width: 76px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7);
-  transition: color 0.1s, background 0.1s;
-  padding: 1px 3px;
-  border-radius: 2px;
+  max-width: 96px;
+  text-shadow:
+    0 1px 4px rgba(0,0,0,1),
+    0 0 12px rgba(0,0,0,1),
+    0 2px 8px rgba(0,0,0,0.9);
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: color 0.1s;
 }
 .desktop-icon:hover .icon-label,
 .desktop-icon:focus .icon-label {
-  color: #f0e0ff;
-  background: rgba(80,40,160,0.55);
+  color: #e8c8ff;
 }
 
 /* ── typewriter screensaver image */
 .desktop-screensaver {
   position: absolute;
-  right: 0;
-  bottom: 34px;
-  height: 75%;
-  max-height: 480px;
-  width: auto;
-  object-fit: contain;
-  object-position: right bottom;
-  opacity: 0.55;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 1;
   pointer-events: none;
   user-select: none;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 40%, transparent 100%),
-              linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 70%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 40%, transparent 100%);
 }
 
 /* ── taskbar */
 .desktop-taskbar {
-  height: 34px;
-  background: rgba(6,4,14,0.9);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(61,31,110,0.45);
+  height: 42px;
+  background: rgba(8,4,18,0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(80,40,140,0.5);
   display: flex;
   align-items: center;
-  padding: 0 14px;
-  gap: 12px;
+  padding: 0 10px 0 6px;
+  gap: 0;
   position: relative;
   z-index: 2;
   flex-shrink: 0;
 }
-.taskbar-btn {
+
+/* Start button */
+.taskbar-start {
   font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--accent);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #0d0514;
   text-transform: uppercase;
-  padding: 3px 10px;
-  border: 1px solid rgba(168,85,247,0.35);
+  padding: 5px 14px;
+  background: var(--accent);
+  border: none;
   border-radius: 2px;
-  cursor: default;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-right: 10px;
+  transition: background 0.15s;
+}
+.taskbar-start:hover { background: var(--highlight); }
+
+/* divider between start and open windows */
+.taskbar-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(80,40,140,0.45);
+  margin: 0 10px;
   flex-shrink: 0;
 }
-.taskbar-label {
+
+/* open window chips */
+.taskbar-windows {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex: 1;
+  overflow: hidden;
+}
+.taskbar-window {
   font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.14em;
-  color: #2e1a55;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  flex: 1;
+  color: var(--muted);
+  padding: 4px 12px;
+  border: 1px solid rgba(61,31,110,0.5);
+  border-radius: 2px;
+  cursor: pointer;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  background: rgba(30,10,60,0.4);
+}
+.taskbar-window:hover {
+  background: rgba(80,40,160,0.35);
+  color: var(--text);
+  border-color: rgba(168,85,247,0.4);
+}
+.taskbar-window.taskbar-active {
+  background: rgba(100,40,200,0.3);
+  color: var(--accent);
+  border-color: rgba(168,85,247,0.55);
+}
+
+/* system tray */
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  padding-left: 10px;
+  border-left: 1px solid rgba(61,31,110,0.4);
+  margin-left: 8px;
 }
 .taskbar-time {
   font-family: var(--font-mono);
   font-size: 9.5px;
   letter-spacing: 0.12em;
-  color: #4a3278;
+  color: #6a4a9a;
   flex-shrink: 0;
 }
 
@@ -1065,7 +1492,7 @@ body {
   .icon-folder::before { height: 36px; }
   .icon-label { font-size: 11px; max-width: none; }
   .desktop-screensaver { display: none; }
-  .taskbar-label { display: none; }
+  .taskbar-windows { display: none; }
 }
 
 /* (old genkan classes — no longer rendered, kept for safety) */
@@ -1258,6 +1685,92 @@ body {
   color: var(--text);
   line-height: 1.3;
   margin-bottom: 6px;
+}
+
+/* ── tag filter bar */
+.tag-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 28px 0 24px;
+  margin-bottom: 0;
+  justify-content: center;
+}
+.tag-filter {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  padding: 5px 13px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tag-filter:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.tag-filter.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d0514;
+  font-weight: 700;
+}
+
+/* hide filtered-out articles */
+.article-card.filtered-out {
+  display: none;
+}
+
+/* no results message */
+.tag-no-results {
+  padding: 60px 0;
+  text-align: center;
+}
+.tag-no-results-msg {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  line-height: 2;
+  text-transform: uppercase;
+}
+
+/* multi-select active state */
+.tag-filter.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d0514;
+  font-weight: 700;
+}
+
+/* type tags — slightly bolder to signal format hierarchy */
+.tag-type-filter {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text);
+  border-color: rgba(168,85,247,0.3);
+}
+.tag-type-filter.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d0514;
+}
+
+/* separator between type and theme groups */
+.tag-filter-sep {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 4px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .article-tags {
@@ -1616,6 +2129,35 @@ body {
 }
 .btn-leave:hover { color: var(--text); border-color: var(--muted); }
 
+/* ─── BEDROOM — THOSE WHO READ ────────────────── */
+.those-who-read {
+  max-width: 680px;
+  margin: 48px auto 64px;
+  padding: 0 40px;
+}
+.those-who-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.45em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.those-who-body p {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: #d8c8f0;
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 26px;
+  letter-spacing: 0.01em;
+}
+.those-who-body p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── KITCHEN QUOTES ──────────────────────────── */
 .quotes-placeholder {
   font-family: var(--font-serif);
@@ -1658,57 +2200,86 @@ body {
 <div id="landing">
   <div class="file-outer">
     <div class="file-cover">
-      <div class="file-grain"></div>
-      <div class="file-scanlines"></div>
-      <div class="file-watermark">CLASSIFIED</div>
-      <div class="hole-punches">
-        <div class="hole"></div>
-        <div class="hole"></div>
-        <div class="hole"></div>
-      </div>
-
-      <div class="class-banner top">CLASSIFIED &nbsp;//&nbsp; EYES ONLY &nbsp;//&nbsp; VIB-5-3000</div>
-
       <div class="file-body">
-        <!-- Hero -->
-        <div class="file-hero">
-          <div class="file-hero-label">Subject of Investigation</div>
-          <div class="file-hero-designation">VIB-5-3000 &nbsp;//&nbsp; "VIOLET IS BLUE" &nbsp;//&nbsp; AKA: <span class="rx-inline">███████</span></div>
-          <h1 class="file-hero-name">Violet is Blue</h1>
-          <p class="file-hero-desc">A classified archive of essays, stories, observations,<br>and emotional evidence.</p>
-        </div>
 
-        <div class="file-divider"></div>
-
-        <!-- Meta + photo -->
-        <div class="file-top-row">
-          <div class="meta-section">
-            <div class="stamp-classified">Top Secret</div>
-            <table class="meta-table">
-              <tr><td class="meta-key">File No</td><td class="meta-val">VIB-5-3000</td></tr>
-              <tr><td class="meta-key">Status</td><td class="meta-val">Active / Refuses to Die</td></tr>
-              <tr><td class="meta-key">Threat Level</td><td class="meta-val"><span class="threat-dot"></span>Intimate Liability</td></tr>
-              <tr><td class="meta-key">Content</td><td class="meta-val">Evidence, Obsession, Loose Ends</td></tr>
-              <tr><td class="meta-key">Access</td><td class="meta-val">Authorized Eyes Only</td></tr>
-            </table>
+        <!-- department header -->
+        <div class="profile-dept">
+          <div class="profile-dept-name">
+            <strong>Bureau of Unauthorized Creativity</strong>
+            Emotional Forensics Unit — Active Subject File
           </div>
-          <div class="photo-box">
-            <img src="images/profile.png" alt="Subject" class="photo-img">
+          <div class="profile-dept-case">
+            <span class="profile-dept-case-label">Case No.</span>
+            <span class="profile-dept-case-num">VIB-5-3000</span>
           </div>
         </div>
 
-        <div class="file-summary">
-          <div class="file-summary-label">Case Summary</div>
-          <p class="file-summary-text">Subject writes with <span class="rx">intent and without apology</span>. The body of work is <span class="rx">deeply, recklessly personal</span> and has been known to cause <span class="rx">emotional disturbance in readers</span>. Subject is considered <span class="rx">voluntarily dangerous</span>. Proceed only if you can handle <span class="rx">the truth</span>.</p>
+
+        <!-- main body: fields left, photo top-right -->
+        <div class="profile-body">
+
+          <div class="profile-fields">
+            <div class="profile-field">
+              <span class="profile-field-key">Full Name</span>
+              <span class="profile-field-val">Violet is Blue</span>
+            </div>
+            <div class="profile-field">
+              <span class="profile-field-key">AKA</span>
+              <span class="profile-field-val" style="color:#5a3f78; letter-spacing:0.15em;">███████</span>
+            </div>
+            <div class="profile-field">
+              <span class="profile-field-key">Status</span>
+              <span class="profile-field-val">Active / Containment Failed</span>
+            </div>
+            <div class="profile-field">
+              <span class="profile-field-key">Primary Offense</span>
+              <span class="profile-field-val">Poetic Interference with Plausible Deniability</span>
+            </div>
+            <div class="profile-field">
+              <span class="profile-field-key">Known Method</span>
+              <span class="profile-field-val">Pattern recognition. Emotional trespassing. Bloodless crimes.</span>
+            </div>
+          </div>
+
+          <div class="profile-photo-col">
+            <div class="profile-photo-frame">
+              <img src="images/profile.png" alt="Subject">
+            </div>
+          </div>
+
         </div>
 
-        <button class="btn-open" onclick="openDossier()">
-          <span class="btn-open-label">— Authorized Personnel Only —</span>
-          <span class="btn-open-cta">Unseal File &nbsp;→</span>
-        </button>
+        <!-- case narrative -->
+        <div class="profile-narrative">
+          <span class="profile-narrative-label">Case Narrative</span>
+          <p class="profile-narrative-text">Subject does not admit to her crimes. She makes you confess first. Her method is quiet escalation — she slips in through the ordinary and begins collecting evidence no one else dares acknowledge. Nothing appears violent at first. That is the violence. She does not accuse. She builds the room, locks the door, dims the lights, and leaves the reader holding the weapon they never realized they were carrying. Every observation is surgically timed. The accuracy is unforgivable. Readers report the eerie feeling that her words are reading them back.</p>
+        </div>
+
+        <!-- reader liability -->
+        <div class="profile-reader-liability">
+          <span class="rl-header">
+            <span class="rl-warn">⚠</span>
+            Reader Liability
+            <span class="rl-warn">⚠</span>
+          </span>
+          The Bureau assumes no responsibility for the quiet dismantling of your preferred narrative. Proceed at your own risk.
+        </div>
+
+        <!-- footer: classification strip + button -->
+        <div class="profile-footer">
+          <div class="profile-classification">
+            <span class="profile-classification-text">Top Secret</span>
+            <div class="profile-classification-sep"></div>
+            <span class="profile-classification-text">Eyes Only</span>
+            <div class="profile-classification-sep"></div>
+            <span class="profile-classification-text">VIB-5-3000</span>
+          </div>
+          <button class="btn-open" onclick="openDossier()">
+            <span class="btn-open-cta">Unseal File</span>
+          </button>
+        </div>
+
       </div>
-
-      <div class="class-banner bottom">TOP SECRET &nbsp;//&nbsp; VIB-5-3000 &nbsp;—&nbsp; DO NOT DUPLICATE</div>
     </div>
   </div>
 </div>
@@ -1731,62 +2302,52 @@ body {
     </div>
   </div>
 
-  <div class="file-header">
-    <div class="file-header-left">FILE: <strong id="current-room-label">GENKAN</strong></div>
-    <div class="file-header-right">VIOLET IS BLUE — MIND PALACE</div>
-  </div>
 
   <!-- GENKAN -->
   <div class="room active" id="room-genkan">
     <div class="vib-desktop">
-
-      <!-- Menu bar -->
-      <div class="desktop-menubar">
-        <span class="menubar-brand">VIB</span>
-        <span class="menubar-clock" id="desktop-clock">--:--</span>
-      </div>
 
       <!-- Desktop area -->
       <div class="desktop-area">
         <div class="desktop-icons-grid">
 
           <div class="desktop-icon" onclick="switchRoom('kitchen')" tabindex="0" role="button" aria-label="Kitchen">
-            <div class="icon-folder" style="--fc:#7040b0"></div>
+            <div class="icon-folder" style="--fc:#a259f7"></div>
             <span class="icon-label">Kitchen</span>
           </div>
 
           <div class="desktop-icon" onclick="switchRoom('bathtub')" tabindex="0" role="button" aria-label="Bathtub">
-            <div class="icon-folder" style="--fc:#5530a0"></div>
+            <div class="icon-folder" style="--fc:#8b46ee"></div>
             <span class="icon-label">Bathtub</span>
           </div>
 
           <div class="desktop-icon" onclick="switchRoom('bedroom')" tabindex="0" role="button" aria-label="Bedroom">
-            <div class="icon-folder" style="--fc:#6a38a8"></div>
+            <div class="icon-folder" style="--fc:#b06cff"></div>
             <span class="icon-label">Bedroom</span>
           </div>
 
           <div class="desktop-icon" onclick="switchRoom('lounge')" tabindex="0" role="button" aria-label="Lounge">
-            <div class="icon-folder" style="--fc:#482888"></div>
+            <div class="icon-folder" style="--fc:#7e52d8"></div>
             <span class="icon-label">Lounge</span>
           </div>
 
           <div class="desktop-icon" onclick="switchRoom('balcony')" tabindex="0" role="button" aria-label="Balcony">
-            <div class="icon-folder" style="--fc:#5c3498"></div>
+            <div class="icon-folder" style="--fc:#9860f0"></div>
             <span class="icon-label">Balcony</span>
           </div>
 
           <div class="desktop-icon" onclick="switchRoom('toilet')" tabindex="0" role="button" aria-label="Toilet">
-            <div class="icon-folder" style="--fc:#5e3ca8"></div>
+            <div class="icon-folder" style="--fc:#9a64f2"></div>
             <span class="icon-label">Toilet</span>
           </div>
 
           <div class="desktop-icon" onclick="switchRoom('library')" tabindex="0" role="button" aria-label="Library">
-            <div class="icon-folder" style="--fc:#4a3090"></div>
+            <div class="icon-folder" style="--fc:#8455e0"></div>
             <span class="icon-label">Library</span>
           </div>
 
           <div class="desktop-icon" onclick="enterDungeon()" tabindex="0" role="button" aria-label="Dungeon — invite only">
-            <div class="icon-folder" style="--fc:#2e1040">
+            <div class="icon-folder" style="--fc:#7a3fd0">
               <span class="folder-badge">🔒</span>
             </div>
             <span class="icon-label">Dungeon</span>
@@ -1798,11 +2359,6 @@ body {
       </div>
 
       <!-- Taskbar -->
-      <div class="desktop-taskbar">
-        <div class="taskbar-btn">⊞ VIB OS</div>
-        <div class="taskbar-label">Mind Palace OS &nbsp;—&nbsp; Personal Archive</div>
-        <div class="taskbar-time" id="desktop-clock-bar">--:--</div>
-      </div>
 
     </div>
   </div>
@@ -1823,16 +2379,51 @@ body {
     <div class="room-hero"><img src="images/bathtub.png" alt="Bathtub" class="room-hero-img"></div>
     <h2 class="room-heading">Bathtub</h2>
     <p class="room-sub">This is where we get naked.</p>
+    <div class="tag-filter-bar" id="tag-filter-bar">
+      <button class="tag-filter active" data-filter="all">All</button>
+      <span class="tag-filter-sep"></span>
+      <button class="tag-filter tag-type-filter" data-filter="Poetry">Poetry</button>
+      <button class="tag-filter tag-type-filter" data-filter="Essay">Essay</button>
+      <button class="tag-filter tag-type-filter" data-filter="Letters">Letters</button>
+      <span class="tag-filter-sep"></span>
+      <button class="tag-filter tag-theme-filter" data-filter="Fiction">Fiction</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Love">Love</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Family">Family</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Travel">Travel</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Pain">Pain</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Feminism">Feminism</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Philosophy">Philosophy</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Abstract">Abstract</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Business">Business</button>
+      <button class="tag-filter tag-theme-filter" data-filter="Endometriosis">Endometriosis</button>
+    </div>
     <div class="articles-grid" id="articles-grid"></div>
+    <div class="tag-no-results" id="tag-no-results" style="display:none">
+      <span class="tag-no-results-msg">No pieces exist at this particular intersection.<br>Try a different combination.</span>
+    </div>
   </div>
 
   <!-- BEDROOM -->
   <div class="room" id="room-bedroom">
+    <div class="room-hero"><img src="images/bedroom.png" alt="Bedroom" class="room-hero-img"></div>
     <h2 class="room-heading">Bedroom</h2>
-    <p class="room-sub">You come here often?</p>
-    <div class="placeholder-block">
-      <div class="ph-stamp">Classified — Pending Release</div>
-      <p>An analysis of what it means that you like this writer's writing.<br>Come back when we're ready to tell you what's wrong with you.</p>
+    <p class="room-sub">Apparently, you come here often.</p>
+
+    <div class="those-who-read">
+      <div class="those-who-label">Those Who Read</div>
+      <div class="those-who-body">
+        <p>The people who like Violet's work are rarely naive. They're not looking for comfort. They're not looking for reassurance. Her fans don't read her for answers. They read her with recognition. They've been there too. Maybe they are going through similar experiences to hers. Or maybe she sounds like a version of themselves from a few chapters back—still sharp, still hungry, still running a bit too hot. There's a tenderness in that recognition. Not superiority. Empathy. People who love her work don't want to be saved, they want to be seen without being simplified. That's the mirror she holds up. Not everyone wants to look into it.</p>
+
+        <p>These are people who have crossed at least one irreversible line in their lives. Not metaphorically. Literally. Something happened, something ended, something broke. Something changed them in a way that didn't come with a clean explanation. And afterward, they had to keep functioning anyway. Her writing doesn't explain that experience, it assumes it. That's the hook. Her work doesn't walk the reader from innocence to insight. It starts after that transition. Readers who haven't crossed a line like that often feel lost or unmoved. Readers who have feel an immediate sense of familiarity.</p>
+
+        <p>They do not need emotional validation. They're not reading to feel less alone. They already know they're alone in certain parts of themselves, and they've made peace with that, much like she has. What they want is recognition. They want to know if someone else sees the same shape of reality they do. That someone else knows exactly what they're carrying and doesn't ask them to put it down. Violet's writing doesn't reassure. It doesn't say "this is normal" or "you're okay." It says "this exists." That's enough for the right reader.</p>
+
+        <p>Violet's work is sparse, controlled, and often stops short of explanation. It rewards readers who are comfortable filling in gaps themselves. People who need things spelled out don't like her writing. Her fans know what it's like to be responsible for outcomes. To make decisions where "trying your best" isn't the metric. To live with consequences quietly. They also tend to be people who are suspicious of narrative closure. Violet often ends pieces without tying a bow. She doesn't extract lessons. She doesn't tell the reader what to think. She doesn't give tidy answers and they don't want any, because their own lives have proven that neat endings are not to be trusted. They don't want resolution. They want something that feels true and authentic, even if it's incomplete.</p>
+
+        <p>People who love her work are often people who do not talk much about the most important parts of their inner world. Not because they're repressed. Because they don't find most conversations capable of holding it. Her writing doesn't try to hold those parts either. It just acknowledges they exist and moves on. That restraint is what makes the reader feel safe. They're reading because the work confirms something they already know but rarely see articulated clearly.</p>
+
+        <p>What they respond to isn't her vulnerability or her intelligence in isolation. It's her refusal to lie about how things actually feel once you've been there, done that, bought the t-shirt. They trust the work because it doesn't try to persuade them of anything. It simply describes a reality they already inhabit. This reader doesn't idolize the writer. They don't want to be taught how to live. They're not looking for a voice to follow. They're looking for a voice that can stand next to them — parallel, and say the ugly things beautifully.</p>
+      </div>
     </div>
   </div>
 
@@ -1848,8 +2439,9 @@ body {
 
   <!-- BALCONY -->
   <div class="room" id="room-balcony">
+    <div class="room-hero"><img src="images/balcony.png" alt="Balcony" class="room-hero-img"></div>
     <h2 class="room-heading">Balcony</h2>
-    <p class="room-sub" style="margin-bottom:40px;"></p>
+    <p class="room-sub">This is where we look at the stars.</p>
     <div class="shakespeare">Doubt thou the stars are fire,
 Doubt that the sun doth move,
 Doubt truth to be a liar,
@@ -1863,6 +2455,7 @@ But never doubt I love.</div>
 
   <!-- TOILET -->
   <div class="room" id="room-toilet">
+    <div class="room-hero"><img src="images/toilet.png" alt="Toilet" class="room-hero-img"></div>
     <h2 class="room-heading">Toilet</h2>
     <p class="room-sub">This is where we spend time on our phone.</p>
     <div class="phone-wrap">
@@ -1898,6 +2491,7 @@ But never doubt I love.</div>
 
   <!-- LIBRARY -->
   <div class="room" id="room-library">
+    <div class="room-hero"><img src="images/library.png" alt="Library" class="room-hero-img"></div>
     <h2 class="room-heading">Library</h2>
     <p class="room-sub">Other people's words that live rent-free in my head.</p>
     <div class="placeholder-block">
@@ -1924,7 +2518,7 @@ But never doubt I love.</div>
 ═══════════════════════════════════════════════ -->
 <div id="article-data" style="display:none">
 
-<article data-title="Apple Picking" data-type="prose" data-tags="Fiction,Love,Pain">He was a tall man, in his seventies. I can't remember exactly how he kidnapped me. All I can recall is slowly gaining consciousness in a damp basement. I felt lightheaded. This distinct smell of old furniture and dust was unfamiliar; I had never been in this house. I found myself tied to an ugly mustard-colored couch, made of velvet. When I lifted my gaze to meet his, he announced he intended to kill me. I didn't exactly think we were going to crochet and talk about boys, but this was pretty much the worst it could get. He stepped forward and ran a curled finger against my cheek. Things were escalating. He leaned in, brushing his stubbled face against mine. I felt his breath, warm on my neck. "I've always wanted to kill a girl while I was inside of her," he whispered in a way which should only be reserved for vastly different words. I stand corrected, this was the worst it could get. He smelled like old people and illness. Maybe he's dying, I thought. Maybe I'm a bucket-list item he's waited until the very end to tick off. I felt as if I was about to puke out of my ears. As he pulled off my scarf, I swallowed a large gulp of air and tasted the last seconds of dignity I'll have in this life. He unsheathed a dagger, and I wondered if he'll ram it under my rib cage, or just slit my throat. I judged him in my mind for needing a blade at all. Was he not man enough to snuff the life out of me with his bare hands? I wondered which of those three would be the least unpleasant, as if I had a choice. Men... it's usually easier to tell what they're into, but this one was hard to read. I don't know him. It occurred to me at that moment he doesn't know me, either. This is not an act of vengeance or hate, it's that of a barbaric psychopath. I can't talk myself out of this one. There was no stopping this.
+<article data-title="Apple Picking" data-type="prose" data-tags="Essay,Fiction,Love,Pain">He was a tall man, in his seventies. I can't remember exactly how he kidnapped me. All I can recall is slowly gaining consciousness in a damp basement. I felt lightheaded. This distinct smell of old furniture and dust was unfamiliar; I had never been in this house. I found myself tied to an ugly mustard-colored couch, made of velvet. When I lifted my gaze to meet his, he announced he intended to kill me. I didn't exactly think we were going to crochet and talk about boys, but this was pretty much the worst it could get. He stepped forward and ran a curled finger against my cheek. Things were escalating. He leaned in, brushing his stubbled face against mine. I felt his breath, warm on my neck. "I've always wanted to kill a girl while I was inside of her," he whispered in a way which should only be reserved for vastly different words. I stand corrected, this was the worst it could get. He smelled like old people and illness. Maybe he's dying, I thought. Maybe I'm a bucket-list item he's waited until the very end to tick off. I felt as if I was about to puke out of my ears. As he pulled off my scarf, I swallowed a large gulp of air and tasted the last seconds of dignity I'll have in this life. He unsheathed a dagger, and I wondered if he'll ram it under my rib cage, or just slit my throat. I judged him in my mind for needing a blade at all. Was he not man enough to snuff the life out of me with his bare hands? I wondered which of those three would be the least unpleasant, as if I had a choice. Men... it's usually easier to tell what they're into, but this one was hard to read. I don't know him. It occurred to me at that moment he doesn't know me, either. This is not an act of vengeance or hate, it's that of a barbaric psychopath. I can't talk myself out of this one. There was no stopping this.
 
 The way I saw it, I had three options. The first was to die in the most violating way imaginable. The second, was to try to please this deranged human so thoroughly, that I'll convince him to let me stay here. Alive. For him, forever... all the more violating. I decided to go for the third option. I decided to tick him off and make him kill me right here and now. Let his finger on my cheek be the utmost extent of how close I get to this troubled creature. It's not a natural thought process, strategizing how to make someone kill you, but I wasn't going to let me down. I wondered why we don't have an internal self-destruct button, or an automatic seal to shut off all the orifices in our body? Why didn't biology or evolution give women a way to protect themselves? Why don't we have an intruder alert mechanism, like a bank lockdown when a robbery is afoot? I was going to die, and I was going to die now. My mind raced trying to come up with a plan. What he does with my corpse afterwards doesn't bother me, I'll be long gone by then. And if he tries, I hope my body will do that thing where dead people shit themselves. I hope I diarrhea all over this motherfucker's couch. It's high time he got a new one. I hope I rot here for the rest of his life. I hope I make his house reek.
 
@@ -2056,7 +2650,7 @@ For gathering crowds;
 Bar lovers none fathom
 What happens in clouds.</article>
 
-<article data-title="Darpec 427" data-type="prose" data-tags="Fiction,Abstract,Philosophy">I watched as the letters appeared and then deleted themselves off the screen. I wondered if they'll ever stop. I still didn't know who was on Darpec 427, or where that ship came from. A part of me hoped I'll never find out. The stuff I deal with nowadays is not cute, to say the least. My job pays well, but the side effects include the weight of the world, and the type of guilt that will slowly rust you from the inside. If I won't, someone else will have to bear this cross, but it will be done. If you ever wondered why good people do bad things, today was the kind of day you find out you are the answer to that question. One of those days you need a long hug from someone who won't ask you what's wrong. Sometimes, I wonder when will be the next time I get a proper hug. I can't even go cry cathartically on the bathroom floor, because one of my five roommates is in the fucking bathroom almost all the time. I hate having roommates. I hate waiting in line for the shower. We're all saving the world these days. Not from aliens or anything cool like that. Movies always make saving the world look like a fucking joyride. It isn't. Saving the world is pretty boring stuff, ask anyone who's done it.
+<article data-title="Darpec 427" data-type="prose" data-tags="Essay,Fiction,Abstract,Philosophy">I watched as the letters appeared and then deleted themselves off the screen. I wondered if they'll ever stop. I still didn't know who was on Darpec 427, or where that ship came from. A part of me hoped I'll never find out. The stuff I deal with nowadays is not cute, to say the least. My job pays well, but the side effects include the weight of the world, and the type of guilt that will slowly rust you from the inside. If I won't, someone else will have to bear this cross, but it will be done. If you ever wondered why good people do bad things, today was the kind of day you find out you are the answer to that question. One of those days you need a long hug from someone who won't ask you what's wrong. Sometimes, I wonder when will be the next time I get a proper hug. I can't even go cry cathartically on the bathroom floor, because one of my five roommates is in the fucking bathroom almost all the time. I hate having roommates. I hate waiting in line for the shower. We're all saving the world these days. Not from aliens or anything cool like that. Movies always make saving the world look like a fucking joyride. It isn't. Saving the world is pretty boring stuff, ask anyone who's done it.
 
 There are two kinds of jobs at Xormax: desks and fields. I've always loved the field, I spent much time assigned to it. But I do what command wants, and they want me on desks. They want me being important, and making decisions and having people salute me in the hallway. Don't get me wrong, I appreciate being trusted, and there is ample meaning in my line of work, but it's not my cup of tea. I should be out there, in my natural habitat. If you don't fuck around — you don't find out. I like to fuck around. "Desks" is what it sounds like. At least I got my own office. There are seven radars, four monitors, and a fax machine at my station. Yes, a fax machine. We don't use it the way you think. Fax machines hardly get the credit they deserve. I have a black leather clipboard binder I take with me everywhere I go. I've been doing this so long, I rarely stop to ask myself if I still want to be here. Today I stopped. Today, I asked.
 
@@ -2106,7 +2700,7 @@ Kevin from Legal is my corporate kryptonite. And I think that everyone on our te
 
 But I shall not let Kevin from Legal break my spirits with his compliance requests. I shall prevail. Rules were not meant to be broken, sure, but nobody said I can't bend them over a table and spank 'em. Kevin from Legal has no idea what he has coming. Welcome to VioLand, Kevin. We do things a little differently around here. You'll see.</article>
 
-<article data-title="Lucky" data-type="prose" data-tags="Essay,Philosophy,Abstract">I am 100% positive that toys for babies are a scam. Have you ever given a small child a spoon? A stick of celery? A TV remote control? They go to town on that shit. I'll bet $100 that a small human would much prefer a ziplock bag with a splash of olive oil as a form of entertainment, than a Labubu. I know I would. Why are those dolls so scary looking?!! It's giving Chucky, and not in a good way. No matter how good of a parent you are, at some point your kids are gonna find a reason to hate you, and they will needlessly blame you for scarring them for life. I can already imagine mine, sitting on a little couch, telling some gen-z therapist that their problems are all due to the fact their mother deprived them of toys as a toddler — because you best believe I'm not falling for that bozo toys-for-babies propaganda. You bored? Go outside. Touch some grass. Find a pet rock. Make up a game. I'm gonna take my crunchy to the next level. You just wait and see. My mom used to feed me carob spread and tell me it's Nutella, and I turned out just fine. I'm sure they'll manage.
+<article data-title="Lucky" data-type="prose" data-tags="Essay,Family,Abstract">I am 100% positive that toys for babies are a scam. Have you ever given a small child a spoon? A stick of celery? A TV remote control? They go to town on that shit. I'll bet $100 that a small human would much prefer a ziplock bag with a splash of olive oil as a form of entertainment, than a Labubu. I know I would. Why are those dolls so scary looking?!! It's giving Chucky, and not in a good way. No matter how good of a parent you are, at some point your kids are gonna find a reason to hate you, and they will needlessly blame you for scarring them for life. I can already imagine mine, sitting on a little couch, telling some gen-z therapist that their problems are all due to the fact their mother deprived them of toys as a toddler — because you best believe I'm not falling for that bozo toys-for-babies propaganda. You bored? Go outside. Touch some grass. Find a pet rock. Make up a game. I'm gonna take my crunchy to the next level. You just wait and see. My mom used to feed me carob spread and tell me it's Nutella, and I turned out just fine. I'm sure they'll manage.
 
 Babies are incredibly easy to entertain. They aren't the problem. I am. I have no bigger nemesis in this life, than boredom itself. I am naturally a very curious person, but alas, I am also very quick to lose interest in most things, most places, and most people. Because most things lose their appeal. And most places are more of the same. And most people are made of cardboard. So on the rare occasion I encounter something truly enchanting in the realms of our multiverse, I try to enjoy it.
 
@@ -2170,7 +2764,7 @@ Verdict: Might spank you. Might make you cry. Not stable. Not subtle.
 
 Zodiac Sign: Aries | Occupation: DJ &amp; takes it too seriously | City: Berlin | Love Language: Physical touch | Fave Position: Cowgirl | Biggest Strength: Energy | Fatal Flaw: Manchild | Drink Order: MDMA &amp; Pepsi | Toxic Trait: Lacks self-awareness | After 2 Drinks: Will convince all of his friends to go skinny dipping | Theme song: Edamame, bbno$, Rich Brian</article>
 
-<article data-title="Quatro" data-type="prose" data-tags="Essay,Love,Feminism">"Where were you last night?" he asked. "At Dean's," I said. This was exactly what it looked like. Micheal parked the car. We sat in silence for some time. He knew this day would come, but it was nevertheless a punch in the neck. "Are you okay? Was it okay? I'll kill him." My brother was struggling. "Dude. I'm fine. It was awesome." I thought we were done discussing the absence of my virginity, but then he went on. "Baro, you just promise me one thing, okay?" I nodded. "You never let anyone fuck you — you fuck them. Alright?" He couldn't bear the thought of someone hurting his little baby sister. Micheal has been a father long before he had kids. He was born a father. Sometimes, he was mine.
+<article data-title="Quatro" data-type="prose" data-tags="Essay,Family,Feminism">"Where were you last night?" he asked. "At Dean's," I said. This was exactly what it looked like. Micheal parked the car. We sat in silence for some time. He knew this day would come, but it was nevertheless a punch in the neck. "Are you okay? Was it okay? I'll kill him." My brother was struggling. "Dude. I'm fine. It was awesome." I thought we were done discussing the absence of my virginity, but then he went on. "Baro, you just promise me one thing, okay?" I nodded. "You never let anyone fuck you — you fuck them. Alright?" He couldn't bear the thought of someone hurting his little baby sister. Micheal has been a father long before he had kids. He was born a father. Sometimes, he was mine.
 
 "I'll fuck em dry, bro." I promised. "Swear to me you're fine," he was pale. "Do you wanna know my favorite position, or can we go have lunch?" I said jokingly. "Ew. Gross. Get out of my car." If one of my brothers knew something, it was safe to assume they all did. So I wasn't surprised when later that day Donny came to give his input on the matter. He explained why I should never do anal, so I told him to stay out of my garbage chute. And then Ralph called me to his room to inform me that condoms actually have an expiration date. Who fucking knew. Being a teenage girl with 3 older brothers was one heck of a circus.</article>
 
@@ -2196,7 +2790,7 @@ I get home. I light all of the candles I can find and turn off the lights. I lie
 
 The mind is a beautiful thing. It cares about me. It wants me to survive. It erases my memory, so I can keep living. So I can smile again. So I can write witty punch lines and enjoy my silly little hobbies. So I can pretend none of that just happened, and lie to myself it will never happen again. So I can get back up again every time with a newfound passion for life. With 47 new ideas to pursue. With so much to say. It locks away these memories, as soon as it can, so I can enjoy the peaceful moments my body lets me have. So I can forget all about it. Until next time. But like. No big deal. I'm totes fine. Live laugh love. N' stuff.</article>
 
-<article data-title="Savoury" data-type="prose" data-tags="Essay,Abstract">Despite my Ukrainian heritage gradually fading away with seven generations of life in Israel, and my Polish roots being wiped out of existence by the Second World War, my DNA has been most triumphant in the battle of my palette. When it comes to my food preferences, I am one stinky, filthy, Slavic bitch. I am a garlic girl. But not just any garlic girl — I don't simply add 20 cloves when the recipe calls for 2. No, sir. When left unsupervised, I will consume an entire jar of raw pickled garlic. And then I'll run around trying to find Guy to see if he wants a juicy, garlicy kiss. He never does. Go figure.
+<article data-title="Savoury" data-type="prose" data-tags="Essay,Travel,Family">Despite my Ukrainian heritage gradually fading away with seven generations of life in Israel, and my Polish roots being wiped out of existence by the Second World War, my DNA has been most triumphant in the battle of my palette. When it comes to my food preferences, I am one stinky, filthy, Slavic bitch. I am a garlic girl. But not just any garlic girl — I don't simply add 20 cloves when the recipe calls for 2. No, sir. When left unsupervised, I will consume an entire jar of raw pickled garlic. And then I'll run around trying to find Guy to see if he wants a juicy, garlicy kiss. He never does. Go figure.
 
 I'm a raw fish, tinned fish, smoked fish, grilled fish, fish eggs, fishy kinda lady. I'm a boiled-onion gal, a cabbage soup maniac, and a sauerkraut addict. I am a crowned potato princess. And by George, do I love me a good pickle. I could rank every single mayonnaise in Israel by the order of how superior it is; I have much to say about mayo. I would bathe in it if I could. My favorite section of the supermarket is the canned foods.
 
@@ -2297,7 +2891,7 @@ On Earth, Heaven or Hell,
 He'll always be the only Stranger
 I know much too well.</article>
 
-<article data-title="Tartufo Bianco" data-type="prose" data-tags="Essay,Love">He was in his underwear, cooking me pasta with white truffles that were foraged by dogs in the woods that same afternoon, when my mom called. I put her on speaker. "Are you home?" she asked. I was butt naked in a small town called Alba, drinking wine and watching the sun set over rural Italy. A view that could only be described as so-good-it-looked-AI-generated. But I wasn't about to tell her that I'm not in my Reichman dorm room. "Yepsters," I replied. "Are you alone?" she followed-up. "Indeed, I am," I answered. He smiled at me. It's funny to look at another human while they are lying to their mother.
+<article data-title="Tartufo Bianco" data-type="prose" data-tags="Essay,Travel,Love">He was in his underwear, cooking me pasta with white truffles that were foraged by dogs in the woods that same afternoon, when my mom called. I put her on speaker. "Are you home?" she asked. I was butt naked in a small town called Alba, drinking wine and watching the sun set over rural Italy. A view that could only be described as so-good-it-looked-AI-generated. But I wasn't about to tell her that I'm not in my Reichman dorm room. "Yepsters," I replied. "Are you alone?" she followed-up. "Indeed, I am," I answered. He smiled at me. It's funny to look at another human while they are lying to their mother.
 
 When you're a kid, they teach you that lying is bad, but that is a lie. Lying isn't bad at all. If I told the truth all the time I would be in heaps of trouble. That particular day, the truth was that a charming, successful, and very charismatic bearded man, whom I first made out with just last week, demanded I marry him, so I told this lovely human I'm not ready for a relationship, but I'll let him take me to dinner if he asked nicely. The next day he informed me he made us dinner reservations, in Italy. I packed a bag. We flew first class. Dined at the Four Seasons, Milano. Then took a road trip. He planned the whole week. Cooking lessons with nonas, outrageous nature, food markets, shopping, and so much pasta. Mr. Navarro was the most romantic man I had ever met in my life. He figured out pretty early that I'll do just about anything if it thickens the plot.
 
@@ -2307,7 +2901,7 @@ Mr. Navarro was a darling man. He drank 2 liters of San Pellegrino every single 
 
 I did not enjoy leaving Mr. Navarro. It's hard to walk away from a relationship when there's nothing wrong besides the fact it's not... it. It ended badly. I'm not good at breakups. But I take comfort in knowing I have made space for the right girl to be spoiled rotten by him, to love him back the way he wished to be loved.</article>
 
-<article data-title="Taurus" data-type="prose" data-tags="Essay,Love,Philosophy">"I didn't like Game of Thrones," I said. "You gotta commit. It's a slow burner. Did you get to the end of season two?" I hadn't. There were too many characters and too many plot lines and I got bored. "Here's what's about to happen Vi, I'm going to go to the kitchen and make you the best carbonara you ever had in your life. You're going to lie in my bed, put pasta into your face and marathon seasons 1+2. You are not to leave my house until you are done. Do you copy?" Ever since I can remember him, there is nothing Micheal loved more than good food, and a good TV series.
+<article data-title="Taurus" data-type="prose" data-tags="Essay,Family,Philosophy">"I didn't like Game of Thrones," I said. "You gotta commit. It's a slow burner. Did you get to the end of season two?" I hadn't. There were too many characters and too many plot lines and I got bored. "Here's what's about to happen Vi, I'm going to go to the kitchen and make you the best carbonara you ever had in your life. You're going to lie in my bed, put pasta into your face and marathon seasons 1+2. You are not to leave my house until you are done. Do you copy?" Ever since I can remember him, there is nothing Micheal loved more than good food, and a good TV series.
 
 Later that day Micheal sat me down and asked to have a serious conversation. "We are going to make a vow of loyalty to one another." Micheal is a Taurus, and I am a Taurus. We take loyalty very seriously. "Vi, I hereby vow to never speak ill of you to others, to never stay silent while another is talking shit about you. I promise to either defend you, or walk away — but never to listen. And even if I know you were in the wrong, that you did a bad thing and deserve all the hate coming your way, I promise to defend you. If there's something iffy on my mind about you, I'll take it straight to you, and only to you. Never to another. Never behind your back. Would you vow to do the same for me?"
 
@@ -2325,7 +2919,7 @@ I do not know how he lives with himself; the man at the helm on that fateful Oct
 
 It feels, more and more, like watching a woman stay with an abusive husband because he swears he will protect her. Meanwhile, the house is in ruins, her body is bruised, and he is giving interviews about what a difficult time this has been for him. If Israel were my best friend, I would sit her down, hold both her hands, and tell her to leave this abusive man. He is not sorry enough. He does not love you. Because she deserves better. And I can only hope that someday soon she'll get it.</article>
 
-<article data-title="The Pasta Thief" data-type="prose" data-tags="Essay,Abstract,Philosophy">I am no thief. But that is not to say I have never stolen anything. I have. Once. And it was, I maintain, an act of principle. It began on Passover, many years ago, when I found myself in urgent need of pasta. I went down to the supermarket, only to discover that the non-Passover-kosher section had been sealed off, as though fusilli were a societal threat. Naturally, I adapted. A small slit in the plastic. A quick hand. A bag of pasta secured.
+<article data-title="The Pasta Thief" data-type="prose" data-tags="Essay,Family,Philosophy">I am no thief. But that is not to say I have never stolen anything. I have. Once. And it was, I maintain, an act of principle. It began on Passover, many years ago, when I found myself in urgent need of pasta. I went down to the supermarket, only to discover that the non-Passover-kosher section had been sealed off, as though fusilli were a societal threat. Naturally, I adapted. A small slit in the plastic. A quick hand. A bag of pasta secured.
 
 At the register, I attempted to behave like a law-abiding citizen. The cashier informed me, kindly, that she could not scan the item. It was blocked on the computer. Forbidden. Unavailable. And so, a decision presented itself. Not just about pasta, but about whether I quietly accept a religious rule which I have never agreed to, simply because it is there. Would I allow this moment to define me as someone who conforms, or as someone who does what must be done? I stole the pasta. Two weeks later, I returned, purchased a bag, and placed it back on the shelf. So technically, I only borrowed it. Consider it a small, starch-based protest against having someone else's religious boundaries enforced on me without consent.
 
@@ -2401,14 +2995,34 @@ function openDossier() {
   }, 800);
 }
 
+const HERO_ROOMS = new Set(['kitchen', 'bathtub', 'bedroom', 'balcony', 'toilet', 'library']);
+
+// taskbar open-windows tracking
+const openedRooms = ['genkan']; // order of visits
+const ROOM_ICONS = { genkan:'🖥', kitchen:'🍑', bathtub:'🛁', bedroom:'🛏', lounge:'🛋', balcony:'🌙', toilet:'🚽', library:'📚' };
+
+function updateTaskbar(activeRoom) {
+  const bar = document.getElementById('taskbar-windows');
+  if (!bar) return;
+  bar.innerHTML = openedRooms.map(r => `
+    <div class="taskbar-window${r === activeRoom ? ' taskbar-active' : ''}" onclick="switchRoom('${r}')">
+      ${ROOM_ICONS[r] || '📁'} ${r.charAt(0).toUpperCase() + r.slice(1)}
+    </div>`).join('');
+}
+
 function switchRoom(room) {
   if (room === 'dungeon') { enterDungeon(); return; }
   currentRoom = room;
+  // add to taskbar history if not already there
+  if (!openedRooms.includes(room)) openedRooms.push(room);
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelector(`[data-room="${room}"]`).classList.add('active');
   document.querySelectorAll('.room').forEach(r => r.classList.remove('active'));
   document.getElementById(`room-${room}`).classList.add('active');
-  document.getElementById('current-room-label').textContent = room.toUpperCase();
+  // toggle has-hero on file-body for flush hero layout
+  const fileBody = document.querySelector('.file-body');
+  if (fileBody) fileBody.classList.toggle('has-hero', HERO_ROOMS.has(room));
+  updateTaskbar(room);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2471,7 +3085,69 @@ function buildArticles() {
       </div>
       <div class="article-body">${bodyHTML}</div>
     `;
+    // store tags on card for filtering
+    card.dataset.tags = tagsRaw.join(',');
     grid.appendChild(card);
+  });
+
+  // filter state: one type at most, many themes
+  let activeTypeFilter = null;
+  const activeThemeFilters = new Set();
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.article-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const tags = card.dataset.tags.split(',').map(t => t.trim());
+      const typeOk  = !activeTypeFilter  || tags.includes(activeTypeFilter);
+      const themeOk = activeThemeFilters.size === 0 || [...activeThemeFilters].every(f => tags.includes(f));
+      const matches = typeOk && themeOk;
+      card.classList.toggle('filtered-out', !matches);
+      if (matches) visible++;
+    });
+    const noResults = document.getElementById('tag-no-results');
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function refreshAllBtn() {
+    const noneActive = !activeTypeFilter && activeThemeFilters.size === 0;
+    document.querySelector('.tag-filter[data-filter="all"]').classList.toggle('active', noneActive);
+  }
+
+  document.querySelectorAll('.tag-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      const isType = btn.classList.contains('tag-type-filter');
+
+      if (filter === 'all') {
+        // reset everything
+        activeTypeFilter = null;
+        activeThemeFilters.clear();
+        document.querySelectorAll('.tag-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      } else if (isType) {
+        // type: mutually exclusive
+        document.querySelectorAll('.tag-type-filter').forEach(b => b.classList.remove('active'));
+        if (activeTypeFilter === filter) {
+          activeTypeFilter = null; // toggle off
+        } else {
+          activeTypeFilter = filter;
+          btn.classList.add('active');
+        }
+        refreshAllBtn();
+      } else {
+        // theme: multi-select
+        if (activeThemeFilters.has(filter)) {
+          activeThemeFilters.delete(filter);
+          btn.classList.remove('active');
+        } else {
+          activeThemeFilters.add(filter);
+          btn.classList.add('active');
+        }
+        refreshAllBtn();
+      }
+      applyFilters();
+    });
   });
 }
 
