@@ -6,7 +6,7 @@
 <title>Violet is Blue</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:        #09070f;
@@ -20,7 +20,8 @@
   --border-2:  #1c1828;
   --stamp-red:   #8b2525;
   --stamp-green: #2e5c40;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'DM Mono', 'Courier New', monospace;
   --room-pad: 40px;
   --section-gap: 48px;
@@ -34,7 +35,7 @@ html { font-size: 16px; scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -404,11 +405,11 @@ body {
   margin-bottom: 12px;
 }
 .profile-narrative-text {
-  font-family: var(--font-serif);
-  font-size: 17px;
+  font-family: var(--font-sans);
+  font-size: 15px;
   color: var(--text);
-  line-height: 1.8;
-  font-weight: 400;
+  line-height: 1.85;
+  font-weight: 300;
 }
 .profile-reader-liability {
   margin: 0 24px 20px;
@@ -1554,12 +1555,12 @@ body {
 }
 
 .genkan-card-desc {
-  font-family: var(--font-serif);
-  font-size: 12.5px;
+  font-family: var(--font-sans);
+  font-size: 12px;
   color: var(--muted);
   line-height: 1.65;
   flex: 1;
-  font-style: italic;
+  font-weight: 300;
 }
 
 .genkan-card-enter {
@@ -1720,11 +1721,11 @@ body {
 }
 
 .article-preview {
-  font-family: var(--font-serif);
-  font-size: 15px;
-  font-style: italic;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.65;
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1763,11 +1764,11 @@ body {
 .article-content {
   padding: 20px 28px 28px;
   border-top: 1px solid var(--border);
-  font-family: var(--font-serif);
-  font-size: 18px;
+  font-family: var(--font-sans);
+  font-size: 15px;
   line-height: 1.85;
   color: var(--text);
-  font-weight: 400;
+  font-weight: 300;
   max-width: 660px;
 }
 
