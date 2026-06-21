@@ -992,8 +992,11 @@ body {
 #room-balcony > *:not(.room-hero),
 #room-toilet > *:not(.room-hero),
 #room-library > *:not(.room-hero) {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: var(--room-pad);
+  padding-right: var(--room-pad);
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #room-kitchen .room-heading,
 #room-bathtub .room-heading,
@@ -1567,6 +1570,8 @@ body {
 .articles-grid {
   display: grid;
   gap: 2px;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .article-card {
@@ -1606,8 +1611,9 @@ body {
   flex-wrap: wrap;
   gap: 6px;
   padding: 28px 0 24px;
-  margin-bottom: 0;
+  margin: 0 auto;
   justify-content: center;
+  max-width: 860px;
 }
 .tag-filter {
   font-family: var(--font-mono);
