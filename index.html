@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:        #070508;
-  --surface:   #0f0d14;
-  --surface2:  #181520;
+  --bg:        #09070f;
+  --surface:   #100d1a;
+  --surface2:  #181422;
   --accent:    #7a5aaa;
   --highlight: #a88cd0;
-  --text:      #ede8e0;
-  --muted:     #6b6360;
-  --border:    #252027;
-  --border-2:  #1a1720;
+  --text:      #e8e2f0;
+  --muted:     #6b6278;
+  --border:    #241f30;
+  --border-2:  #1c1828;
   --stamp-red:   #8b2525;
   --stamp-green: #2e5c40;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -1580,92 +1580,79 @@ body {
 
 /* ─── ARTICLES (BATHTUB) ───────────────────────── */
 .articles-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 800px;
   margin: 0 auto;
-  border-top: 1px solid var(--border);
 }
 
 .article-card {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   overflow: hidden;
-  padding: 36px 0;
-  transition: none;
+  transition: border-color 0.2s;
 }
-.article-card:nth-child(odd) {
-  padding-right: 40px;
-  border-right: 1px solid var(--border);
+.article-card:hover {
+  border-color: var(--border-2);
 }
-.article-card:nth-child(even) {
-  padding-left: 40px;
-}
-.article-card--featured {
-  grid-column: 1 / -1;
-  padding-right: 0 !important;
-  border-right: none !important;
-  padding-left: 0 !important;
-}
-.article-card--featured .article-title { font-size: 32px; }
+.article-card--featured { /* no longer used, harmless */ }
 
 .article-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 28px;
   cursor: pointer;
-  gap: 0;
 }
 
 .article-header-left {
-  flex: 1;
+  flex: 0 0 200px;
   min-width: 0;
-  width: 100%;
 }
 
 .article-title {
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 20px;
   font-style: italic;
   font-weight: 700;
   color: var(--text);
   line-height: 1.3;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  margin-top: 6px;
 }
 
 /* ── tag filter bar */
 .tag-filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 0 0 20px;
+  gap: 8px;
+  padding: 0 0 24px;
   margin: 0 auto;
-  max-width: 860px;
-  border-bottom: 1px solid var(--border);
+  max-width: 800px;
 }
 .tag-filter {
   font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 0;
-  border: none;
+  padding: 5px 13px;
+  border: 1px solid var(--border);
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  transition: color 0.15s;
+  transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
 .tag-filter:hover {
   color: var(--text);
+  border-color: var(--muted);
 }
 .tag-filter.active {
   color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 5px;
+  border-color: var(--text);
+  text-decoration: none;
 }
 
 /* hide filtered-out articles */
@@ -1716,18 +1703,20 @@ body {
 .tag {
   font-family: var(--font-mono);
   font-size: 8px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 0;
+  padding: 3px 8px;
   background: none;
-  border: none;
+  border: 1px solid var(--border);
   font-weight: 400;
 }
 .tag.tag-type {
-  color: var(--muted);
+  color: var(--text);
+  border-color: var(--border);
 }
 .tag.tag-theme {
   color: var(--muted);
+  border-color: var(--border-2);
 }
 
 .article-preview {
@@ -1736,11 +1725,11 @@ body {
   font-style: italic;
   color: var(--muted);
   line-height: 1.6;
+  flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-top: 4px;
 }
 
 .article-toggle {
@@ -1756,7 +1745,6 @@ body {
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-top: 14px;
   display: block;
 }
 .article-card:hover .article-toggle { color: var(--highlight); }
@@ -1773,14 +1761,14 @@ body {
 }
 
 .article-content {
-  padding: 20px 0 0;
+  padding: 20px 28px 28px;
   border-top: 1px solid var(--border);
-  margin-top: 20px;
   font-family: var(--font-serif);
-  font-size: 19px;
-  line-height: 1.8;
+  font-size: 18px;
+  line-height: 1.85;
   color: var(--text);
   font-weight: 400;
+  max-width: 660px;
 }
 
 .article-content p { margin-bottom: 1.2em; }
@@ -2122,12 +2110,10 @@ body {
   .tab-brand { display: none; }
   .room { padding: 28px 16px; }
   .room-heading { margin-bottom: 8px; }
-  .articles-grid { grid-template-columns: 1fr; }
-  .article-card:nth-child(odd) { padding-right: 0; border-right: none; }
-  .article-card:nth-child(even) { padding-left: 0; }
-  .article-card--featured .article-title { font-size: 24px; }
+  .article-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 18px; }
+  .article-header-left { flex: none; width: 100%; }
   .article-preview { display: none; }
-  .article-content { padding: 16px 0 0; }
+  .article-content { padding: 14px 18px 20px; }
   .phone-frame { border-radius: 24px; }
   .phone-messages { height: 320px; }
   .shakespeare { padding: 48px 24px 0; font-size: clamp(22px, 5vw, 32px); }
@@ -3018,9 +3004,9 @@ function buildArticles() {
         <div class="article-header-left">
           <div class="article-tags">${tagsHTML}</div>
           <div class="article-title">${title}</div>
-          <div class="article-preview">${preview}</div>
-          <button class="article-toggle" onclick="event.stopPropagation(); toggleArticle(${i})"></button>
         </div>
+        <div class="article-preview">${preview}</div>
+        <button class="article-toggle" onclick="event.stopPropagation(); toggleArticle(${i})"></button>
       </div>
       <div class="article-body">${bodyHTML}</div>
     `;
