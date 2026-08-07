@@ -2071,16 +2071,28 @@ body {
 }
 
 /* ─── KITCHEN QUOTES ──────────────────────────── */
-.quotes-placeholder {
-  font-family: var(--font-serif);
-  font-size: 24px;
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.8;
-  text-align: center;
-  padding: 60px 20px;
-  border: 1px dashed var(--border);
+.quotes-grid {
+  columns: 3;
+  column-gap: 1px;
+  background: rgba(255,255,255,0.04);
+  margin-top: 8px;
 }
+.quote-card {
+  break-inside: avoid;
+  background: #0b0815;
+  padding: 28px 24px;
+  margin-bottom: 1px;
+}
+.quote-card p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.85;
+  color: rgba(240,235,248,0.88);
+  margin: 0;
+}
+@media (max-width: 900px) { .quotes-grid { columns: 2; } }
+@media (max-width: 540px) { .quotes-grid { columns: 1; } }
 
 /* ─── UTILITY ──────────────────────────────────── */
 .hidden { display: none !important; }
@@ -2280,9 +2292,23 @@ body {
     <div class="room-hero"><img src="images/peach.png" alt="Kitchen" class="room-hero-img"></div>
     <h2 class="room-heading">Kitchen</h2>
     <p class="room-sub">You want a little bite? Of course you do...</p>
-    <div class="placeholder-block">
-      <div class="ph-stamp">Exhibit Pending</div>
-      <p>Short-form snackable content coming soon.<br>Check back when she's had her coffee.</p>
+    <div class="quotes-grid">
+      <div class="quote-card"><p>There are more than 8 billion people in this world. But only a small handful of them are a whole ass reason to live.</p></div>
+      <div class="quote-card"><p>Rules were not meant to be broken, sure, but nobody said I can't bend them over a table and spank 'em.</p></div>
+      <div class="quote-card"><p>I am a crime scene because your fingerprints are all over me, and I'm scared to think about it.</p></div>
+      <div class="quote-card"><p>If you can't learn to reincarnate every few weeks, you won't make it.</p></div>
+      <div class="quote-card"><p>It feels less like civic duty and more like a mandatory subscription service I did not sign up for and cannot cancel.</p></div>
+      <div class="quote-card"><p>do you wanna know my favorite position, or can we go have lunch?</p></div>
+      <div class="quote-card"><p>Every day I sit at my boring little desk, and I save the world.</p></div>
+      <div class="quote-card"><p>At times, it feels as though I've taken a 10,000% interest loan from the black market. Every month I miss a payment, someone threatens to break another finger.</p></div>
+      <div class="quote-card"><p>I am not capable of doing things halfway. There is no version of my life where I eat a slightly disappointing beetroot.</p></div>
+      <div class="quote-card"><p>Turns out the price of wanting, is hardly worth the thrill.</p></div>
+      <div class="quote-card"><p>To write is to make a private contract with the truth.</p></div>
+      <div class="quote-card"><p>There is not a woman alive today who looks forward to menopause quite as eagerly as I do.</p></div>
+      <div class="quote-card"><p>Since men are in zero danger of having their asshole rearranged as a side effect of procreation, I've decided they should have fewer voting rights on the matter.</p></div>
+      <div class="quote-card"><p>I do not know how to be anything other than myself, so I pick my poisons carefully and measure the dose within an inch of my life.</p></div>
+      <div class="quote-card"><p>Let me keep your soul on speed-dial for emergencies.</p></div>
+      <div class="quote-card"><p>I spiritually identify as sardines in olive oil, and sexually identify as salmon sashimi.</p></div>
     </div>
   </div>
 
